@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.order.userservice.dao.mapper.AddressMapper">
+
+   <resultMap id="BaseResultMap" type="com.order.userservice.dao.entity.Address">
+        <id column="address_id" jdbcType="INTEGER" property="addressId"/>
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <id column="address_country" jdbcType="VARCHAR" property="addressCountry"/>
+        <id column="address_province" jdbcType="VARCHAR" property="addressProvince"/>
+        <id column="address_city" jdbcType="VARCHAR" property="addressCity"/>
+        <id column="address_street" jdbcType="VARCHAR" property="addressStreet"/>
+        <id column="address_detail" jdbcType="VARCHAR" property="addressDetail"/>
+        <id column="address_receiver_phone" jdbcType="VARCHAR" property="addressReceiverPhone"/>
+        <id column="address_receiver_name" jdbcType="VARCHAR" property="addressReceiverName"/>
+    </resultMap>
+    <select id="findAddressByAddressIdAndUserId" resultType="com.order.userservice.dao.entity.Address" resultMap="BaseResultMap">
+        SELECT * FROM system_receiver_address where address_id = #{addressId} and user_id = #{userId}
+    </select>
+
+</mapper>

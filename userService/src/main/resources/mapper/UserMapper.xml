@@ -1,0 +1,16 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.order.userservice.dao.mapper.UserMapper">
+
+   <resultMap id="BaseResultMap" type="com.order.userservice.dao.entity.User">
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <id column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <id column="user_pwd" jdbcType="VARCHAR" property="userPwd"/>
+    </resultMap>
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.order.userservice.dao.entity.User" resultMap="BaseResultMap">
+        SELECT * FROM system_user where user_id = #{user_id,jdbcType=INTEGER}
+    </select>
+
+</mapper>

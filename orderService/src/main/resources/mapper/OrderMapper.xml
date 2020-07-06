@@ -1,0 +1,41 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.order.orderservice.dao.mapper.OrderMapper">
+
+	<resultMap id="BaseResultMap" type="com.order.orderservice.dao.entity.Order">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo"/>
+        <id column="product_id" jdbcType="INTEGER" property="productId"/>
+        <id column="product_name" jdbcType="INTEGER" property="productName"/>
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <id column="user_name" jdbcType="INTEGER" property="userName"/>
+        <id column="order_time" jdbcType="DATE" property="orderTime"/>
+        <id column="order_status" jdbcType="VARCHAR" property="orderStatus"/>
+        <id column="pay_type" jdbcType="VARCHAR" property="payType"/>
+        <id column="order_price" jdbcType="DECIMAL" property="orderPrice"/>
+        <id column="order_pay_time" jdbcType="DATE" property="orderPayTime"/>
+    </resultMap>
+
+    <select id="findOrdersbyUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT * FROM system_order where user_id = #{user_id,jdbcType=INTEGER}
+    </select>
+    
+    <select id="findOrdersByOrderNo" parameterType="java.lang.String" resultType="com.order.orderservice.dao.entity.Order" resultMap="BaseResultMap">
+        SELECT * FROM system_order where out_trade_no = #{user_id,jdbcType=VARCHAR}
+    </select>
+    
+    <insert id="insert"  keyColumn="id" keyProperty="id" parameterType="com.order.orderservice.dao.entity.Order"
+    useGeneratedKeys="true">
+         insert into system_order(out_trade_no,user_id,user_name,product_id,product_name,order_time,order_status,pay_type,order_price)
+         VALUES (#{outTradeNo,jdbcType=VARCHAR},#{userId,jdbcType=INTEGER},
+         #{userName,jdbcType=VARCHAR},#{productId,jdbcType=INTEGER},
+         #{productName,jdbcType=VARCHAR},#{orderTime,jdbcType=DATE},
+         #{orderStatus,jdbcType=VARCHAR},#{payType,jdbcType=VARCHAR},
+         #{orderPrice,jdbcType=DECIMAL})
+
+    </insert>
+    
+
+</mapper>
